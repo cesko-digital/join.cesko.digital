@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the simple registration backend."
-  version: "0.1.0"
+  version: "0.1.1"
   title: "Volunteer Registration Form API"
   contact:
     email: "pavel.suchmann@gmail.com"
