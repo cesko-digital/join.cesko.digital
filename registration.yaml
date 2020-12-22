@@ -69,21 +69,34 @@ definitions:
               type: "array"
               minimum: 1
               items:
-                type: "string"
-                example:
-                - "Mobilní"
-                - "Servis"
-            mentor:
-              type: "boolean"
-              description: "Ask about mentorship if true"
-            senior:
-              type: "boolean"
-              description: "Ask about seniorship if true"
+                type: "object"
+                required:
+                - "text"
+                - "id"
+                properties:
+                  text:
+                    type: "string"
+                  id:
+                    type: "string"
+              example:
+                - id: "recu71mPBhoYZWTtq"
+                  text: "Mobilní"
+                - id: "recwSqRn0BRKxN7IF"
+                  text: "Web"
+            mentor_id:
+              type: "string"
+              description: "Ask about mentorship if this optional property is present"
+              example: "recFgcjWmfXN42HyM"
+            senior_id:
+              type: "string"
+              description: "Ask about seniorship if this optional property is present"
+              example: "recwSqRn0BRKxN7IF"
   NewVolunteer:
     type: "object"
     required:
     - "name"
     - "email"
+    - "options_selected"
     properties:
       name:
         type: "string"
@@ -92,34 +105,14 @@ definitions:
         type: "string"
         format: "email"
         example: "dvolny@example.com"
-      skills:
+      options_selected:
         type: "array"
         minimum: 0
         items:
-          type: "object"
-          required:
-          - "skill"
-          - "details"
-          properties:
-            skill:
-              type: "string"
-              example: "Design"
-            details:
-              type: "array"
-              minimum: 1
-              items:
-                type: "string"
-                example:
-                - "Mobilní"
-                - "Servis"
-            mentor:
-              type: "boolean"
-              example: true
-              description: "Send true if checked by the volunteer. Default: false"
-            senior:
-              type: "boolean"
-              example: false
-              description: "Send true if checked by the volunteer."
+          type: "string"
+          example:
+          - "recwSqRn0BRKxN7IF"
+          - "recu71mPBhoYZWTtq"
   ApiResponse:
     type: "object"
     properties:
