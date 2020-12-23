@@ -23,7 +23,7 @@ paths:
           description: "Retrieve the hierarchy of C.D skills"
           schema:
             $ref: "#/definitions/SkillHierarchy"
-  /volutneers:
+  /volunteers:
     post:
       summary: "Create the new volunteer record"
       description: ""
