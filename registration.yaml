@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the simple registration backend."
-  version: "0.1.1"
+  version: "0.1.2"
   title: "Volunteer Registration Form API"
   contact:
     email: "pavel.suchmann@gmail.com"
@@ -110,7 +110,7 @@ definitions:
         minimum: 0
         items:
           type: "string"
-          example:
+        example:
           - "recwSqRn0BRKxN7IF"
           - "recu71mPBhoYZWTtq"
   ApiResponse:

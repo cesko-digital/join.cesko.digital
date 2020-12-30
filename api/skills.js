@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import querystring from 'querystring'
+//import querystring from 'querystring'
 
 const uri_part = process.env.AIRTABLE_URI_PART
 const api_key = process.env.AIRTABLE_API_KEY
@@ -59,28 +59,7 @@ module.exports = (req, res) => {
     console.log(e)
     res.status(500).json({
       code: 50000,
-      message: JSON.stringify(e.response)
+      message: JSON.stringify(e)
     })
   })
-/*
-  res.status(200).json({
-    skills: [
-      {
-        skill: "Design",
-        details: [
-          {
-            id: "recu71mPBhoYZWTtq",
-            text: "Mobilní"
-          },
-          {
-            id: "recwSqRn0BRKxN7IF",
-            text: "Web"
-          }
-        ],
-        mentor_id: "recFgcjWmfXN42HyM",
-        senior_id: "recwSqRn0BRKxN7IF"
-      }
-    ]
-  })
-  */
 }
