@@ -2,10 +2,8 @@
   "name": "volunteer-registration-form-api",
   "version": "0.1.1",
   "description": "This is the simple registration backend.",
-  "scripts": {
-  },
-  "keywords": [
-  ],
+  "scripts": {},
+  "keywords": [],
   "license": "Unlicense",
   "private": true,
   "dependencies": {
