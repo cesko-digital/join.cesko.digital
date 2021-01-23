@@ -1,0 +1,44 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "lib": ["dom", "es2015"],
+    "baseUrl": "src",
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": false,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "paths": {
+      "components/*": [
+        "components/*",
+        "../node_modules/cesko-digital-web/src/components/*"
+      ],
+      "images/*": [
+        "images/*",
+        "../node_modules/cesko-digital-web/src/images/*"
+      ],
+      "styles/*": [
+        "styles/*",
+        "../node_modules/cesko-digital-web/src/styles/*"
+      ],
+      "theme/*": ["theme/*", "../node_modules/cesko-digital-web/src/theme/*"],
+      "pages/*": ["pages/*", "../node_modules/cesko-digital-web/src/pages/*"]
+    }
+  },
+  "files": ["node_modules/cesko-digital-web/src/theme/default/styled.d.ts"],
+  "include": ["src/**/*", "stories/**/*", "cesko-digital-web/src/**/*"],
+  "exclude": [
+    "node_modules",
+    "public",
+    ".cache",
+    "build",
+    "webpack",
+    "jest",
+    "**/*/*.test.ts"
+  ]
+}

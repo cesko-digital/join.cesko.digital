@@ -1,2 +1,2 @@
 # cd-registration
-Cesko Digital Registration Backend
+Cesko Digital Registration Form

@@ -1,0 +1,10 @@
+form_heading: Kontaktní formulář
+form_submit: Odeslat
+field_name: Jméno
+field_email: E-mail
+validation_name: Zadejte prosím vaše jméno
+validation_email: Zadejte prosím platný email
+skills_heading: S čím nám chceš pomáhat?
+skills_body: Vyber hlavní odvětví a k němu přidružené dovednosti, ve kterých nám
+  můžeš pomoct.
+checkbox_confirmation: Souhlasím se zpracováním osobních údajů

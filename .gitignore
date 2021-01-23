@@ -69,11 +69,18 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.test
+.env*
+!.env.example
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
+
+# gatsby and storybook files
+public
+storybook-static
+
+# Mac files
+.DS_Store
 
 # Next.js build output
 .next
@@ -102,5 +109,22 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Yarn
+yarn-error.log
+.pnp/
+.pnp.js
+# Yarn Integrity file
+.yarn-integrity
+
+# IDE - VSCode
+.vscode
+
+# IDE - IntelliJ
+.idea
+
+# Cypress
+cypress/videos
+cypress/screenshots
 
 .vercel
