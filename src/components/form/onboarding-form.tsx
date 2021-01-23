@@ -3,11 +3,16 @@ import Strings from '../../../content/onboarding-form.yaml'
 import Input from 'components/form/input'
 import Checkbox from 'components/form/checkbox'
 import { Button } from 'components/buttons'
-import * as Onboarding from 'components/onboarding/styles'
+import SkillTree from 'components/skill-tree'
+import { SkillField } from '../../services/skillService'
+import { FormStatus } from './'
+import * as Components from 'components/onboarding/styles'
 import * as S from './styles'
 
 export interface OnboardingFormProps {
-  skills?: any
+  skills: SkillField[]
+  setFormStatus: (status: FormStatus) => void
+  status: FormStatus
 }
 
 interface OnboardingFormState {
@@ -70,12 +75,14 @@ class OnboardingForm extends React.PureComponent<
     // run validations on submit
     await this.validateName(this.state.name)
     await this.validateEmail(this.state.email)
+    // TODO: validation for at least 1 skill (not mentor, not senior) in form
+    // TODO: send POST, set form status
   }
 
   render() {
     return (
       <S.Form onSubmit={this.onFormSubmit}>
-        <Onboarding.H4>{Strings.form_heading}</Onboarding.H4>
+        <Components.H4>{Strings.form_heading}</Components.H4>
         <Input
           type="text"
           id="name"
@@ -96,12 +103,16 @@ class OnboardingForm extends React.PureComponent<
           isValid={this.state.validations.email}
           validationMessage={Strings.validation_email}
         />
-        <Onboarding.H4>{Strings.skills_heading}</Onboarding.H4>
-        <Onboarding.Body>{Strings.skills_body}</Onboarding.Body>
+        <Components.H4>{Strings.skills_heading}</Components.H4>
+        <Components.Body>{Strings.skills_body}</Components.Body>
+        <SkillTree skills={this.props.skills} />
         <S.Footer>
           <Checkbox label={Strings.checkbox_confirmation}></Checkbox>
           <Button type="submit">{Strings.form_submit}</Button>
         </S.Footer>
+        {/* TODO: form fetching progress */}
+        {/* TODO: form fetching error */}
+        {/* TODO: form fetching success */}
       </S.Form>
     )
   }

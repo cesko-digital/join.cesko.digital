@@ -4,13 +4,21 @@ import checkmark from 'images/checkbox-checkmark.svg'
 export const CheckboxWrapper = styled.div`
   display: flex;
   margin-bottom: 40px;
+  position: relative;
 `
 
-export const CheckboxLabel = styled.label``
+export const CheckboxLabel = styled.label`
+  cursor: pointer;
+`
 
 export const Input = styled.input<{ isValid?: boolean }>`
   position: absolute;
   left: 0;
+  top: 4px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border: 0;
   opacity: 0.01;
 
   & + ${CheckboxLabel} {
