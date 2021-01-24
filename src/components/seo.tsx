@@ -27,6 +27,7 @@ interface PureSEOProps {
   lang?: string
   meta?: []
   title?: string
+  robots?: string
 }
 
 interface SEOProps {
@@ -34,6 +35,7 @@ interface SEOProps {
   lang?: string
   meta?: []
   title: string
+  robots?: string
 }
 
 export const PureSEO: React.FC<PureSEOProps> = ({
@@ -41,6 +43,7 @@ export const PureSEO: React.FC<PureSEOProps> = ({
   description,
   lang,
   title,
+  robots,
 }: PureSEOProps) => {
   const metaDescription = description || data.site.siteMetadata.description
 
@@ -84,12 +87,21 @@ export const PureSEO: React.FC<PureSEOProps> = ({
           name: `twitter:description`,
           content: metaDescription,
         },
-      ].concat()}
+      ].concat(
+        robots
+          ? [
+              {
+                name: `robots`,
+                content: robots,
+              },
+            ]
+          : []
+      )}
     />
   )
 }
 
-const SEO: React.FC<SEOProps> = ({ description }: SEOProps) => {
+const SEO: React.FC<SEOProps> = ({ description, title, robots }: SEOProps) => {
   const data = useStaticQuery(
     graphql`
       query {
@@ -104,7 +116,14 @@ const SEO: React.FC<SEOProps> = ({ description }: SEOProps) => {
     `
   )
 
-  return <PureSEO data={data} description={description} />
+  return (
+    <PureSEO
+      data={data}
+      title={title}
+      robots={robots}
+      description={description}
+    />
+  )
 }
 
 export default SEO

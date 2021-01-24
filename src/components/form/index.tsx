@@ -18,7 +18,7 @@ const OnboardingFormContainer = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await SkillService.getSkills()
-      setSkills(data.skills)
+      setSkills(SkillService.getSortedSkills(data.skills))
     }
 
     try {

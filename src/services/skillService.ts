@@ -22,6 +22,18 @@ class SkillService {
     const result = await fetched.json()
     return result
   }
+
+  static getSortedSkills(skills: SkillField[]) {
+    return skills
+      .map((skill) => {
+        if (!skill.details || !skill.details.length) return skill
+        skill.details = skill.details
+          .slice()
+          .sort((a, b) => a.text.localeCompare(b.text, 'cs'))
+        return skill
+      })
+      .sort((a, b) => a.skill.localeCompare(b.skill, 'cs'))
+  }
 }
 
 export default SkillService
