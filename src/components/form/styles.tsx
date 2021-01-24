@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { CheckboxWrapper } from 'components/form/checkbox/styles'
+import { ValidationMessage } from 'components/form/input/styles'
 
 export const Form = styled.form`
   max-width: 670px;
@@ -21,4 +22,8 @@ export const Footer = styled.div`
       margin-bottom: 0;
     }
   }
+`
+
+export const FormValidationError = styled(ValidationMessage)`
+  margin-top: 8px;
 `

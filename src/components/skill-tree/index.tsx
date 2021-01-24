@@ -4,9 +4,9 @@ import SkillFieldToggle from './skill-field-toggle'
 import * as S from './styles'
 
 export interface Props {
+  selected: string[]
   skills: SkillField[]
-  // selectedIDs: string[]
-  // onSkillChange: (skill: Skill) => void
+  handleChange: (id: string) => void
 }
 
 const SkillTree = (props: Props) => {
@@ -14,7 +14,11 @@ const SkillTree = (props: Props) => {
     <S.TreeList>
       {props.skills.map((skillField) => (
         <S.TreeListItem key={skillField.skill}>
-          <SkillFieldToggle skillField={skillField} />
+          <SkillFieldToggle
+            skillField={skillField}
+            selected={props.selected}
+            handleChange={props.handleChange}
+          />
         </S.TreeListItem>
       ))}
     </S.TreeList>

@@ -18,6 +18,8 @@ export interface OnboardingFormProps {
 interface OnboardingFormState {
   name: string
   email: string
+  selectedSkills: string[]
+  personalData: boolean
   validations: {
     [name: string]: boolean
   }
@@ -27,12 +29,16 @@ class OnboardingForm extends React.PureComponent<
   OnboardingFormProps,
   OnboardingFormState
 > {
-  state = {
+  state: OnboardingFormState = {
     name: '',
     email: '',
+    selectedSkills: [],
+    personalData: false,
     validations: {
       name: true,
       email: true,
+      skills: true,
+      personalData: true,
     },
   }
 
@@ -48,6 +54,34 @@ class OnboardingForm extends React.PureComponent<
       email: e.target.value,
     })
     this.validateEmail(e.target.value)
+  }
+
+  handleSkillChange = async (id: string) => {
+    const selected = this.state.selectedSkills.slice()
+    const isSelected = selected.indexOf(id) !== -1
+    const args: [number, number, string?] = [
+      isSelected ? selected.indexOf(id) : selected.length,
+      isSelected ? 1 : 0,
+    ]
+    if (!isSelected) {
+      args.push(id)
+    }
+    Array.prototype.splice.apply(selected, args)
+    this.setState(
+      {
+        selectedSkills: selected,
+      },
+      async () => await this.validateFieldSkills()
+    )
+  }
+
+  handlePersonalDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState(
+      {
+        personalData: e.target.checked,
+      },
+      async () => await this.validatePersonalData()
+    )
   }
 
   async validateName(value: string) {
@@ -70,16 +104,63 @@ class OnboardingForm extends React.PureComponent<
     })
   }
 
+  async validateFieldSkills() {
+    const onlyFieldSkills = this.props.skills
+      .map((field) => (field.details ? field.details.map((s) => s.id) : []))
+      .flat()
+
+    const fieldSkillsSelected = onlyFieldSkills.some(
+      (id) => this.state.selectedSkills.indexOf(id) !== -1
+    )
+
+    this.setState({
+      validations: {
+        ...this.state.validations,
+        skills: fieldSkillsSelected,
+      },
+    })
+  }
+
+  async validatePersonalData() {
+    this.setState({
+      validations: {
+        ...this.state.validations,
+        personalData: this.state.personalData !== false,
+      },
+    })
+  }
+
+  async validateForm() {
+    await this.validateName(this.state.name)
+    await this.validateEmail(this.state.email)
+    await this.validateFieldSkills()
+    await this.validatePersonalData()
+
+    const { validations } = this.state
+    return (
+      validations.name &&
+      validations.email &&
+      validations.skills &&
+      validations.personalData
+    )
+  }
+
   onFormSubmit = async (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault()
     // run validations on submit
-    await this.validateName(this.state.name)
-    await this.validateEmail(this.state.email)
-    // TODO: validation for at least 1 skill (not mentor, not senior) in form
+    if (!(await this.validateForm())) return
+    alert('Success!')
     // TODO: send POST, set form status
   }
 
   render() {
+    const FormValidation = () =>
+      !this.state.validations.skills ? (
+        <S.FormValidationError>
+          Vyberte alespoň jednu dovednost
+        </S.FormValidationError>
+      ) : null
+
     return (
       <S.Form onSubmit={this.onFormSubmit}>
         <Components.H4>{Strings.form_heading}</Components.H4>
@@ -105,9 +186,19 @@ class OnboardingForm extends React.PureComponent<
         />
         <Components.H4>{Strings.skills_heading}</Components.H4>
         <Components.Body>{Strings.skills_body}</Components.Body>
-        <SkillTree skills={this.props.skills} />
+        <SkillTree
+          selected={this.state.selectedSkills}
+          skills={this.props.skills}
+          handleChange={this.handleSkillChange}
+        />
+        <FormValidation />
         <S.Footer>
-          <Checkbox label={Strings.checkbox_confirmation}></Checkbox>
+          <Checkbox
+            label={Strings.checkbox_confirmation}
+            checked={this.state.personalData}
+            onChange={this.handlePersonalDataChange}
+            isValid={this.state.validations.personalData}
+          ></Checkbox>
           <Button type="submit">{Strings.form_submit}</Button>
         </S.Footer>
         {/* TODO: form fetching progress */}

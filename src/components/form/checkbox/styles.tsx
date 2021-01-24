@@ -26,7 +26,8 @@ export const Input = styled.input<{ isValid?: boolean }>`
     padding-left: 40px;
     font-size: 20px;
     line-height: 1.6;
-    color: ${({ theme }) => theme.colors.asphalt};
+    color: ${({ theme, isValid }) =>
+      isValid ? theme.colors.asphalt : '#A82700'};
 
     &:before {
       content: '';
@@ -36,7 +37,8 @@ export const Input = styled.input<{ isValid?: boolean }>`
       top: 4px;
       width: 24px;
       height: 24px;
-      border: 2px solid ${({ theme }) => theme.colors.gravel};
+      border: 2px solid
+        ${({ theme, isValid }) => (isValid ? theme.colors.gravel : '#A82700')};
       background-color: ${({ theme }) => theme.colors.white};
       border-radius: ${({ theme }) => theme.borderRadius.base}px;
       user-select: none;
@@ -44,7 +46,9 @@ export const Input = styled.input<{ isValid?: boolean }>`
   }
 
   &:focus + ${CheckboxLabel}:before {
-    box-shadow: 0 0 0 4px rgba(0, 39, 0, 0.1);
+    box-shadow: 0 0 0 4px
+      ${({ isValid }) =>
+        isValid ? 'rgba(0, 39, 0, 0.1)' : 'rgba(168, 39, 0, 0.1)'};
   }
 
   &:focus:checked + ${CheckboxLabel}:before {
@@ -52,12 +56,17 @@ export const Input = styled.input<{ isValid?: boolean }>`
   }
 
   &:checked {
-    & + ${CheckboxLabel}:before {
-      background-color: ${({ theme }) => theme.colors.it};
-      background-image: url(${checkmark});
-      background-repeat: no-repeat;
-      background-position: center;
-      border-color: ${({ theme }) => theme.colors.it};
+    & + ${CheckboxLabel} {
+      color: ${({ theme }) => theme.colors.it};
+      font-weight: ${({ theme }) => theme.fontWeights.bold};
+
+      &:before {
+        background-color: ${({ theme }) => theme.colors.it};
+        background-image: url(${checkmark});
+        background-repeat: no-repeat;
+        background-position: center;
+        border-color: ${({ theme }) => theme.colors.it};
+      }
     }
   }
 `

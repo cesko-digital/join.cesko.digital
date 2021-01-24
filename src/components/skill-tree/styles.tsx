@@ -10,7 +10,7 @@ export const TreeList = styled.ul`
 
 export const TreeListItem = styled.li`
   position: relative;
-  box-shadow: 0 2px 0 rgba(169, 169, 177, 0.5);
+  border-bottom: 2px solid rgba(169, 169, 177, 0.5);
 `
 
 export const ToggleLabel = styled.label`
@@ -33,7 +33,7 @@ export const ToggleContent = styled.div`
 
 export const ToggleContentContainer = styled.div`
   padding-left: 40px;
-  padding-bottom: 35px;
+  padding-bottom: 20px;
 `
 
 export const ToggleInput = styled.input`
@@ -64,12 +64,22 @@ export const ToggleInput = styled.input`
   }
 `
 
-export const SkillCheckbox = styled(Checkbox)`
+export const SkillCheckbox = styled(Checkbox)<{ separated?: boolean }>`
   margin-top: 8px;
   margin-bottom: 0;
+
+  ${({ separated }) =>
+    separated &&
+    `
+    margin: 0;
+    padding: 15px 0;
+    border-top: 2px solid rgba(169, 169, 177, 0.2);
+  `}
 `
 
-export const SkillsList = styled.div``
+export const SkillsList = styled.div`
+  margin-bottom: 20px;
+`
 
 export const SkillsListItem = styled.div``
 

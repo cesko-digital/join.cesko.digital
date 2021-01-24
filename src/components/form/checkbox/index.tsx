@@ -3,6 +3,7 @@ import * as S from './styles'
 
 export interface CheckboxProps extends React.HTMLAttributes<HTMLElement> {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  checked?: boolean
   label?: string
   isValid?: boolean
   validationMessage?: string
