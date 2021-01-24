@@ -10,7 +10,7 @@ export const TreeList = styled.ul`
 
 export const TreeListItem = styled.li`
   position: relative;
-  border-bottom: 2px solid rgba(169, 169, 177, 0.5);
+  border-bottom: 2px solid #cbcbcf;
 `
 
 export const ToggleLabel = styled.label`
@@ -28,7 +28,7 @@ export const ToggleContent = styled.div`
   display: none;
   max-height: 0;
   opacity: 0;
-  transition: 0.3s all;
+  transition: 0.2s all ease-out;
 `
 
 export const ToggleContentContainer = styled.div`

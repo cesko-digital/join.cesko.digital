@@ -3,7 +3,6 @@ import Strings from '../../../content/onboarding-form.yaml'
 import Input from 'components/form/input'
 import Checkbox from 'components/form/checkbox'
 import { Button } from 'components/buttons'
-import SkillTree from 'components/skill-tree'
 import OnboardingService, { SkillField } from 'services/onboardingService'
 import { FormStatus } from './'
 import * as Components from 'components/onboarding/styles'
@@ -40,6 +39,10 @@ class OnboardingForm extends React.PureComponent<
       skills: true,
       personalData: true,
     },
+  }
+
+  get fetchingSkills() {
+    return this.props.status === FormStatus.FETCHING_PROGRESS
   }
 
   handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -199,12 +202,12 @@ class OnboardingForm extends React.PureComponent<
         />
         <Components.H4>{Strings.skills_heading}</Components.H4>
         <Components.Body>{Strings.skills_body}</Components.Body>
-        {/* TODO: fetching progress */}
         {/* TODO: form fetching error */}
-        <SkillTree
+        <S.StyledSkillTree
           selected={this.state.selectedSkills}
           skills={this.props.skills}
           handleChange={this.handleSkillChange}
+          fetching={this.fetchingSkills}
         />
         <FormValidation />
         <S.Footer>

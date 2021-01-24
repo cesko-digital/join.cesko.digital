@@ -19,11 +19,11 @@ const OnboardingFormContainer = () => {
     const fetchData = async () => {
       const data = await OnboardingService.getSkills()
       setSkills(OnboardingService.getSortedSkills(data.skills))
+      setStatus(FormStatus.FETCHING_SUCCESS)
     }
 
     try {
       fetchData()
-      setStatus(FormStatus.FETCHING_SUCCESS)
     } catch (e) {
       setStatus(FormStatus.FETCHING_ERROR)
     } finally {

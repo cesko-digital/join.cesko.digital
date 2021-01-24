@@ -3,7 +3,7 @@ import { SkillField } from 'services/onboardingService'
 import SkillFieldToggle from './skill-field-toggle'
 import * as S from './styles'
 
-export interface Props {
+export interface Props extends React.HTMLAttributes<HTMLUListElement> {
   selected: string[]
   skills: SkillField[]
   handleChange: (id: string) => void
@@ -11,7 +11,7 @@ export interface Props {
 
 const SkillTree = (props: Props) => {
   return (
-    <S.TreeList>
+    <S.TreeList className={props.className}>
       {props.skills.map((skillField) => (
         <S.TreeListItem key={skillField.skill}>
           <SkillFieldToggle
