@@ -11,6 +11,15 @@ export enum FormStatus {
   SUBMIT_ERROR = 'submit-error',
 }
 
+export interface FormContextProps {
+  status: FormStatus
+  setStatus: React.Dispatch<React.SetStateAction<FormStatus>>
+}
+
+export const FormContext = React.createContext<FormContextProps>(
+  {} as FormContextProps
+)
+
 const OnboardingFormContainer = () => {
   const [skills, setSkills] = useState<SkillField[]>([])
   const [status, setStatus] = useState<FormStatus>(FormStatus.FETCHING_PROGRESS)
@@ -30,11 +39,11 @@ const OnboardingFormContainer = () => {
     }
   }, [])
 
-  const setFormStatus = (status: FormStatus) => {
-    setStatus(status)
-  }
-
-  return <Form skills={skills} status={status} setFormStatus={setFormStatus} />
+  return (
+    <FormContext.Provider value={{ status, setStatus }}>
+      <Form skills={skills} />
+    </FormContext.Provider>
+  )
 }
 
 export default OnboardingFormContainer
