@@ -51,6 +51,9 @@ class OnboardingService {
     const post = await fetch(`${OnboardingService.apiBaseUrl}/volunteers`, {
       method: 'POST',
       body: OnboardingService.getVolunteerPayload(volunteer),
+      headers: {
+        'content-type': 'application/json',
+      },
     })
     const result = await post.json()
     return result
@@ -61,7 +64,7 @@ class OnboardingService {
       return JSON.stringify({
         name: volunteer.name,
         email: volunteer.email,
-        selected_options: volunteer.skills,
+        options_selected: volunteer.skills,
       })
     } catch (e) {
       throw new Error(`Invalid volunteer data: ${e.message}`)
