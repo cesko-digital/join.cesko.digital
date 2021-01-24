@@ -4,7 +4,7 @@ import Input from 'components/form/input'
 import Checkbox from 'components/form/checkbox'
 import { Button } from 'components/buttons'
 import SkillTree from 'components/skill-tree'
-import { SkillField } from '../../services/skillService'
+import OnboardingService, { SkillField } from 'services/onboardingService'
 import { FormStatus } from './'
 import * as Components from 'components/onboarding/styles'
 import * as S from './styles'
@@ -145,12 +145,25 @@ class OnboardingForm extends React.PureComponent<
     )
   }
 
+  async sendFormData() {
+    this.props.setFormStatus(FormStatus.SUBMIT_PROGRESS)
+    try {
+      await OnboardingService.submitVolunteer({
+        name: this.state.name,
+        email: this.state.email,
+        skills: this.state.selectedSkills,
+      })
+      this.props.setFormStatus(FormStatus.SUBMIT_SUCCESS)
+    } catch (e) {
+      this.props.setFormStatus(FormStatus.SUBMIT_ERROR)
+    }
+  }
+
   onFormSubmit = async (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault()
     // run validations on submit
     if (!(await this.validateForm())) return
-    alert('Success!')
-    // TODO: send POST, set form status
+    this.sendFormData()
   }
 
   render() {
@@ -186,6 +199,8 @@ class OnboardingForm extends React.PureComponent<
         />
         <Components.H4>{Strings.skills_heading}</Components.H4>
         <Components.Body>{Strings.skills_body}</Components.Body>
+        {/* TODO: fetching progress */}
+        {/* TODO: form fetching error */}
         <SkillTree
           selected={this.state.selectedSkills}
           skills={this.props.skills}
@@ -201,8 +216,6 @@ class OnboardingForm extends React.PureComponent<
           ></Checkbox>
           <Button type="submit">{Strings.form_submit}</Button>
         </S.Footer>
-        {/* TODO: form fetching progress */}
-        {/* TODO: form fetching error */}
         {/* TODO: form fetching success */}
       </S.Form>
     )

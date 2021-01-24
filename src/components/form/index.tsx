@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Form from './onboarding-form'
-import SkillService, { SkillField } from 'services/skillService'
+import OnboardingService, { SkillField } from 'services/onboardingService'
 
 export enum FormStatus {
   FETCHING_PROGRESS = 'fetching-progress',
@@ -17,8 +17,8 @@ const OnboardingFormContainer = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await SkillService.getSkills()
-      setSkills(SkillService.getSortedSkills(data.skills))
+      const data = await OnboardingService.getSkills()
+      setSkills(OnboardingService.getSortedSkills(data.skills))
     }
 
     try {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SkillField } from 'services/skillService'
+import { SkillField } from 'services/onboardingService'
 import Strings from '../../../content/onboarding-form.yaml'
 import * as S from './styles'
 

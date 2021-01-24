@@ -1,5 +1,5 @@
 import React from 'react'
-import { SkillField } from 'services/skillService'
+import { SkillField } from 'services/onboardingService'
 import SkillFieldToggle from './skill-field-toggle'
 import * as S from './styles'
 
