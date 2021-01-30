@@ -21,7 +21,7 @@ This will run the API side by side with Gatsby on localhost.
 
 Install vercel CLI globally https://vercel.com/download.
 
-Login to vercel and pull env variables for the project. For development you can create the project in vercel free account).
+Login to vercel and pull env variables for the project. For development you can create the project in vercel free account.
 
 ```shell
 $ vercel login
