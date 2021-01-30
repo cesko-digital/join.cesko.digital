@@ -14,7 +14,7 @@ export const Footer = styled.div`
   justify-content: space-between;
   flex-direction: column;
   padding-top: 32px;
-  margin-top: 44px;
+  margin-top: 22px;
   border-top: 2px solid rgba(169, 169, 177, 0.25);
 
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
@@ -32,6 +32,7 @@ export const FormValidationError = styled(ValidationMessage)`
 `
 
 export const StyledSkillTree = styled(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ({ fetching, ...props }: SkillTreeProps & { fetching: boolean }) => (
     <SkillTree {...props} />
   )

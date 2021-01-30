@@ -4,11 +4,7 @@ import Head from 'components/head'
 import Header from './header'
 import * as S from 'components/layout/styles'
 
-export interface LayoutProps {
-  children: ReactNode
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
+const Layout: React.FC = ({ children }) => {
   return (
     <S.Container>
       <Head />

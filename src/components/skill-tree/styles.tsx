@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Checkbox from 'components/form/checkbox'
 
 export const TreeList = styled.ul`
-  margin: 0;
+  margin: 0 0 42px;
   padding: 0;
   list-style-type: none;
 `
@@ -28,6 +28,7 @@ export const ToggleContent = styled.div`
   display: none;
   max-height: 0;
   opacity: 0;
+  overflow-y: auto;
   transition: 0.2s all ease-out;
 `
 
@@ -94,3 +95,13 @@ export const ToggleIcon = () => (
     <path d="M7.29289 6.29289C7.68342 6.68342 7.68342 7.31658 7.29289 7.70711L1.7071 13.2929C1.07714 13.9229 0 13.4767 0 12.5858L0 1.41421C0 0.523308 1.07714 0.0771421 1.70711 0.707107L7.29289 6.29289Z" />
   </svg>
 )
+
+export const SelectedCountLabel = styled.span`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 13px 40px;
+  font-size: ${({ theme }) => theme.fontSizes.base}px;
+  line-height: ${({ theme }) => theme.lineHeights.button};
+  pointer-events: none;
+`

@@ -9,4 +9,12 @@ skills_body: Vyber hlavní odvětví a k němu přidružené dovednosti, ve kter
   můžeš pomoct.
 skills_senior: Jsem seniorní
 skills_mentor: Jsem ochoten vést a mentorovat ostatní
+skills_selected_1: Vybrána %{count} dovednost
+skills_selected_2: Vybrány %{count} dovednosti
+skills_selected_5: Vybráno %{count} dovedností
 checkbox_confirmation: Souhlasím se zpracováním osobních údajů
+form_fetching_error: Při načítání formuláře se vyskytla chyba.
+form_submit_error: Při odesílání formuláře se vyskytla chyba, zkuste to, prosím, znovu.
+form_submit_success:
+  Úspěch! Za pár vteřin vás přesměrujeme přímo do Slacku. Pokud nechcete
+  čekat, pokračujte [tudy](https://cesko-digital.slack.com/).

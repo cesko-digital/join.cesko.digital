@@ -3,6 +3,7 @@ import Strings from '../../../content/onboarding-form.yaml'
 import Input from 'components/form/input'
 import Checkbox from 'components/form/checkbox'
 import { Button } from 'components/buttons'
+import Callout from 'components/callout'
 import OnboardingService, { SkillField } from 'services/onboardingService'
 import { FormStatus, FormContext } from './'
 import * as Components from 'components/onboarding/styles'
@@ -103,25 +104,29 @@ const OnboardingForm = (props: OnboardingFormProps) => {
   }
 
   const validateName = async (value: string) => {
+    const validation = !!value.trim()
     setState((prev) => ({
       ...prev,
       validations: {
         ...prev.validations,
-        name: !!value.trim(),
+        name: validation,
       },
     }))
+    return validation
   }
 
   const validateEmail = async (value: string) => {
+    const validation = /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/.test(
+      value.trim()
+    )
     setState((prev) => ({
       ...prev,
       validations: {
         ...prev.validations,
-        email: /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/.test(
-          value.trim()
-        ),
+        email: validation,
       },
     }))
+    return validation
   }
 
   const validateFieldSkills = async () => {
@@ -140,31 +145,27 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         skills: fieldSkillsSelected,
       },
     }))
+    return fieldSkillsSelected
   }
 
   const validatePersonalData = () => {
+    const validation = state.personalData !== false
     setState((prev) => ({
       ...prev,
       validations: {
         ...prev.validations,
-        personalData: prev.personalData !== false,
+        personalData: validation,
       },
     }))
+    return validation
   }
 
   const validateForm = async () => {
-    await validateName(state.name)
-    await validateEmail(state.email)
-    await validateFieldSkills()
-    await validatePersonalData()
-
-    const { validations } = state
-    return (
-      validations.name &&
-      validations.email &&
-      validations.skills &&
-      validations.personalData
-    )
+    const name = await validateName(state.name)
+    const email = await validateEmail(state.email)
+    const skills = await validateFieldSkills()
+    const checkbox = await validatePersonalData()
+    return name && email && skills && checkbox
   }
 
   const sendFormData = async () => {
@@ -185,12 +186,37 @@ const OnboardingForm = (props: OnboardingFormProps) => {
     e.preventDefault()
     // run validations on submit
     if (!(await validateForm())) return
-    sendFormData()
+    await sendFormData()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const redirect = setTimeout(() => {
+      document.location.href = process.env.GATSBY_FORM_REDIRECT_URL || '/'
+    }, 8000)
+  }
+
+  const TemplateStringWithLink: React.FC<{ template: string }> = ({
+    template,
+  }) => {
+    const linkTemplates = template.match(/(\[([^\]]+)\])\(([^)]+)\)/g)
+    if (linkTemplates === null) return <>template</>
+    // we only count that there will be one link
+    const linkText = linkTemplates[0].match(/(\[([^\]]+)\])/)
+    const linkUrl = linkTemplates[0].match(/(\(([^\)]+)\))/)
+    if (linkText === null || linkUrl === null) return <>template</>
+    const partialStrings = template.split(linkTemplates[0])
+    return (
+      <>
+        {partialStrings[0]}
+        <a href={linkUrl[0].replace(/[\(\)]/g, '')}>
+          {linkText[0].replace(/[\[\]]/g, '')}
+        </a>
+        {partialStrings[1]}
+      </>
+    )
   }
 
   const FormValidation = () =>
     !state.validations.skills ? (
-      <S.FormValidationError>
+      <S.FormValidationError role="alert">
         Vyberte alespoň jednu dovednost
       </S.FormValidationError>
     ) : null
@@ -207,6 +233,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         onChange={handleNameChange}
         isValid={state.validations.name}
         validationMessage={Strings.validation_name}
+        disabled={status === FormStatus.SUBMIT_PROGRESS}
       />
       <Input
         type="email"
@@ -217,10 +244,10 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         onChange={handleEmailChange}
         isValid={state.validations.email}
         validationMessage={Strings.validation_email}
+        disabled={status === FormStatus.SUBMIT_PROGRESS}
       />
       <Components.H4>{Strings.skills_heading}</Components.H4>
       <Components.Body>{Strings.skills_body}</Components.Body>
-      {/* TODO: form fetching error */}
       <S.StyledSkillTree
         selected={state.selectedSkills}
         skills={props.skills}
@@ -228,18 +255,29 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         fetching={status === FormStatus.FETCHING_PROGRESS}
       />
       <FormValidation />
+      {status === FormStatus.FETCHING_ERROR && (
+        <Callout type="error">{Strings.form_fetching_error}</Callout>
+      )}
+      {status === FormStatus.SUBMIT_ERROR && (
+        <Callout type="error">{Strings.form_submit_error}</Callout>
+      )}
+      {status === FormStatus.SUBMIT_SUCCESS && (
+        <Callout type="success">
+          <TemplateStringWithLink template={Strings.form_submit_success} />
+        </Callout>
+      )}
       <S.Footer>
         <Checkbox
           label={Strings.checkbox_confirmation}
           checked={state.personalData}
           onChange={handlePersonalDataChange}
           isValid={state.validations.personalData}
+          disabled={status === FormStatus.SUBMIT_PROGRESS}
         ></Checkbox>
         <Button type="submit" disabled={status === FormStatus.SUBMIT_PROGRESS}>
           {Strings.form_submit}
         </Button>
       </S.Footer>
-      {/* TODO: form fetching success */}
     </S.Form>
   )
 }
