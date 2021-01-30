@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { FormContext, FormStatus } from 'components/form/'
 import { SkillField } from 'services/onboardingService'
 import Strings from '../../../content/onboarding-form.yaml'
 import * as S from './styles'
@@ -14,6 +15,8 @@ const SkillFieldToggle = (props: Props) => {
   const contentRef: React.RefObject<HTMLDivElement> = React.createRef()
   const [toggle, setToggle] = useState<boolean>(false)
   const [selectedCount, setSelectedCount] = useState<number>(0)
+
+  const { status } = useContext(FormContext)
 
   useEffect(() => {
     setSelectedCount(calculateSelectedCount())
@@ -44,6 +47,7 @@ const SkillFieldToggle = (props: Props) => {
             label={skill.text}
             onChange={onCheckboxChange}
             checked={isSelected(skill.id)}
+            disabled={status === FormStatus.SUBMIT_PROGRESS}
           />
         </S.SkillsListItem>
       ))}
@@ -114,6 +118,7 @@ const SkillFieldToggle = (props: Props) => {
               label={`${Strings.skills_senior} - ${props.skillField.skill}`}
               onChange={onCheckboxChange}
               checked={isSelected(props.skillField.senior_id)}
+              disabled={status === FormStatus.SUBMIT_PROGRESS}
             />
           )}
           {props.skillField.mentor_id && (
@@ -123,6 +128,7 @@ const SkillFieldToggle = (props: Props) => {
               label={Strings.skills_mentor}
               onChange={onCheckboxChange}
               checked={isSelected(props.skillField.mentor_id)}
+              disabled={status === FormStatus.SUBMIT_PROGRESS}
             />
           )}
         </S.ToggleContentContainer>

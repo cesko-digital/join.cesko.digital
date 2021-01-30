@@ -207,6 +207,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         onChange={handleNameChange}
         isValid={state.validations.name}
         validationMessage={Strings.validation_name}
+        disabled={status === FormStatus.SUBMIT_PROGRESS}
       />
       <Input
         type="email"
@@ -217,6 +218,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         onChange={handleEmailChange}
         isValid={state.validations.email}
         validationMessage={Strings.validation_email}
+        disabled={status === FormStatus.SUBMIT_PROGRESS}
       />
       <Components.H4>{Strings.skills_heading}</Components.H4>
       <Components.Body>{Strings.skills_body}</Components.Body>
@@ -234,6 +236,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
           checked={state.personalData}
           onChange={handlePersonalDataChange}
           isValid={state.validations.personalData}
+          disabled={status === FormStatus.SUBMIT_PROGRESS}
         ></Checkbox>
         <Button type="submit" disabled={status === FormStatus.SUBMIT_PROGRESS}>
           {Strings.form_submit}

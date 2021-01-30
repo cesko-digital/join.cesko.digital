@@ -30,6 +30,10 @@ export const StyledInput = styled.input<{ isValid?: boolean }>`
       ${({ isValid }) =>
         isValid ? 'rgba(0, 39, 0, 0.1)' : 'rgba(168, 39, 0, 0.1)'};
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `
 
 export const ValidationMessage = styled.div`

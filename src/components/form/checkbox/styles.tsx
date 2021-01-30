@@ -69,4 +69,17 @@ export const Input = styled.input<{ isValid?: boolean }>`
       }
     }
   }
+
+  &:disabled + ${CheckboxLabel} {
+    cursor: not-allowed;
+  }
+
+  &:disabled:checked + ${CheckboxLabel} {
+    color: ${({ theme }) => theme.colors.asphalt};
+
+    &:before {
+      background-color: ${({ theme }) => theme.colors.asphalt};
+      border-color: ${({ theme }) => theme.colors.asphalt};
+    }
+  }
 `
