@@ -1,7 +1,7 @@
 import React from 'react'
 import * as S from './styles'
 
-export interface CheckboxProps extends React.HTMLAttributes<HTMLElement> {
+export interface CheckboxProps extends React.InputHTMLAttributes<HTMLElement> {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   checked?: boolean
   label?: string

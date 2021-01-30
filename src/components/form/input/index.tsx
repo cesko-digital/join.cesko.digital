@@ -1,7 +1,8 @@
 import * as React from 'react'
 import * as S from './styles'
 
-export interface InputProps extends React.HTMLAttributes<HTMLElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   label?: string
   isValid?: boolean
@@ -10,6 +11,7 @@ export interface InputProps extends React.HTMLAttributes<HTMLElement> {
 
 const Input = (props: InputProps) => {
   const isValid = typeof props.isValid !== 'undefined' ? props.isValid : true
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { label, children, ...forwardedProps } = props
 
   return (

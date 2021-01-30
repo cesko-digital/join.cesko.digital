@@ -32,6 +32,7 @@ export const FormValidationError = styled(ValidationMessage)`
 `
 
 export const StyledSkillTree = styled(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ({ fetching, ...props }: SkillTreeProps & { fetching: boolean }) => (
     <SkillTree {...props} />
   )
