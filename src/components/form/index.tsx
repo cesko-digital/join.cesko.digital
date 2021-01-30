@@ -5,7 +5,7 @@ import OnboardingService, { SkillField } from 'services/onboardingService'
 export enum FormStatus {
   FETCHING_PROGRESS = 'fetching-progress',
   FETCHING_SUCCESS = 'fetching-success',
-  FETCHING_ERROR = 'fecthing-error',
+  FETCHING_ERROR = 'fetching-error',
   SUBMIT_PROGRESS = 'submit-progress',
   SUBMIT_SUCCESS = 'submit-success',
   SUBMIT_ERROR = 'submit-error',
@@ -26,17 +26,16 @@ const OnboardingFormContainer = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await OnboardingService.getSkills()
-      setSkills(OnboardingService.getSortedSkills(data.skills))
-      setStatus(FormStatus.FETCHING_SUCCESS)
+      try {
+        const data = await OnboardingService.getSkills()
+        setSkills(OnboardingService.getSortedSkills(data.skills))
+        setStatus(FormStatus.FETCHING_SUCCESS)
+      } catch (e) {
+        setStatus(FormStatus.FETCHING_ERROR)
+      }
     }
 
-    try {
-      fetchData()
-    } catch (e) {
-      setStatus(FormStatus.FETCHING_ERROR)
-    } finally {
-    }
+    fetchData()
   }, [])
 
   return (

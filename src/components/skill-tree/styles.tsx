@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Checkbox from 'components/form/checkbox'
 
 export const TreeList = styled.ul`
-  margin: 0;
+  margin: 0 0 42px;
   padding: 0;
   list-style-type: none;
 `
@@ -28,6 +28,7 @@ export const ToggleContent = styled.div`
   display: none;
   max-height: 0;
   opacity: 0;
+  overflow-y: auto;
   transition: 0.2s all ease-out;
 `
 

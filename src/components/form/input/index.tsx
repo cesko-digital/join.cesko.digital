@@ -19,7 +19,9 @@ const Input = (props: InputProps) => {
       <S.InputLabel>{label}</S.InputLabel>
       <S.StyledInput {...forwardedProps} isValid={isValid} />
       {props.isValid === false && (
-        <S.ValidationMessage>{props.validationMessage}</S.ValidationMessage>
+        <S.ValidationMessage role="alert">
+          {props.validationMessage}
+        </S.ValidationMessage>
       )}
     </S.InputWrapper>
   )
