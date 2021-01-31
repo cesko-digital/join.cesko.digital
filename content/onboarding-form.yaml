@@ -17,4 +17,4 @@ form_fetching_error: Při načítání formuláře se vyskytla chyba.
 form_submit_error: Při odesílání formuláře se vyskytla chyba, zkuste to, prosím, znovu.
 form_submit_success:
   Úspěch! Za pár vteřin vás přesměrujeme přímo do Slacku. Pokud nechcete
-  čekat, pokračujte [tudy](https://cesko-digital.slack.com/).
+  čekat, pokračujte [tudy](http://slack.cesko.digital/).
