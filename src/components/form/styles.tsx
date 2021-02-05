@@ -11,7 +11,7 @@ export const Form = styled.form`
 
 export const Footer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-direction: column;
   padding-top: 32px;
   margin-top: 22px;
