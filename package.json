@@ -14,7 +14,7 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint './{src,stories}/**/*.{ts,tsx,js,jsx}'",
     "lint:fix": "eslint --fix './{src,stories}/**/*.{ts,tsx,js,jsx}'",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "storybook": "NODE_ENV=production start-storybook -s ./static -p 6060 -c .storybook watch-css",
     "build-storybook": "gatsby build && NODE_ENV=production build-storybook -s ./static",
     "cy:run": "cypress run",
