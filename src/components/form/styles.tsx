@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import spinner from 'images/spinner.svg'
 import { CheckboxWrapper } from 'components/form/checkbox/styles'
 import { ValidationMessage } from 'components/form/input/styles'
 import SkillTree, { Props as SkillTreeProps } from 'components/skill-tree'
@@ -54,7 +53,6 @@ export const StyledSkillTree = styled(
     transform: translate(-50%, -50%);
     width: 40px;
     height: 40px;
-    background: url(${spinner}) no-repeat center;
     z-index: 1;
     transition: 0.2s all;
   }
