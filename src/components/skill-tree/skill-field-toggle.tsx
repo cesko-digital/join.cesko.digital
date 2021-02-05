@@ -80,8 +80,6 @@ const SkillFieldToggle = (props: Props) => {
         element.style.opacity = '1'
       }, 10)
     } else {
-      element.style.maxHeight = '0'
-      element.style.opacity = '0'
       element.addEventListener(
         'transitionend',
         () => {
@@ -89,6 +87,8 @@ const SkillFieldToggle = (props: Props) => {
         },
         { once: true }
       )
+      element.style.maxHeight = '0'
+      element.style.opacity = '0'
     }
   }
 

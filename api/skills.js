@@ -1,4 +1,4 @@
-
+/* eslint no-console: ["error", { allow: ["log"] }] */
 import axios from 'axios'
 import querystring from 'querystring'
 
@@ -9,45 +9,48 @@ const http = axios.create({
   baseURL: 'https://api.airtable.com/v0/' + uri_part,
   headers: {
     'Content-type': 'application/json',
-    'Authorization': 'Bearer ' + api_key
-  }
+    Authorization: 'Bearer ' + api_key,
+  },
 })
 
-const getPage = (skills, offset=null) => {
+const getPage = (skills, offset = null) => {
   return new Promise((resolve, reject) => {
     const query = {
-      pageSize: 100
+      pageSize: 100,
     }
     if (offset) {
       query.offset = offset
     }
-    http.get('/Skills?' + querystring.stringify(query))
-    .then(response => {
-      for (const record of response.data.records) {
-        const key = record.fields.Field
-        if (key in skills) {
-          skills[key].push({
-            id: record.id,
-            text: record.fields.Subfield
-          })
-        } else {
-          skills[key] = [{
-            id: record.id,
-            text: record.fields.Subfield
-          }]
+    http
+      .get('/Skills?' + querystring.stringify(query))
+      .then((response) => {
+        for (const record of response.data.records) {
+          const key = record.fields.Field
+          if (key in skills) {
+            skills[key].push({
+              id: record.id,
+              text: record.fields.Subfield,
+            })
+          } else {
+            skills[key] = [
+              {
+                id: record.id,
+                text: record.fields.Subfield,
+              },
+            ]
+          }
         }
-      }
-      resolve({
-        skills: skills,
-        offset: response.data.offset
+        resolve({
+          skills: skills,
+          offset: response.data.offset,
+        })
       })
-    })
-    .catch(e => {
-      console.log(e)
-      reject({
-        message: JSON.stringify(e)
+      .catch((e) => {
+        console.log(e)
+        reject({
+          message: JSON.stringify(e),
+        })
       })
-    })
   })
 }
 
@@ -65,12 +68,12 @@ module.exports = async (req, res) => {
       let details = []
       for (const detail of skills[field]) {
         switch (detail.text) {
-          case "_senior":
+          case '_senior':
             item['senior_id'] = detail.id
-            break;
-          case "_mentor":
+            break
+          case '_mentor':
             item['mentor_id'] = detail.id
-            break;
+            break
           default:
             details.push(detail)
         }
@@ -82,7 +85,7 @@ module.exports = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       code: 50000,
-      message: JSON.stringify(err)
+      message: JSON.stringify(err),
     })
   }
 }

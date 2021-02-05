@@ -39,7 +39,6 @@
     "build",
     "webpack",
     "jest",
-    "**/*/*.test.ts",
-    "api"
+    "**/*/*.test.ts"
   ]
 }

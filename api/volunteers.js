@@ -1,4 +1,4 @@
-
+/* eslint no-console: ["error", { allow: ["log"] }] */
 import axios from 'axios'
 //import querystring from 'querystring'
 
@@ -9,35 +9,36 @@ const http = axios.create({
   baseURL: 'https://api.airtable.com/v0/' + uri_part,
   headers: {
     'Content-type': 'application/json',
-    'Authorization': 'Bearer ' + api_key
-  }
+    Authorization: 'Bearer ' + api_key,
+  },
 })
 
 module.exports = (req, res) => {
   console.log(req.body)
-  http.post('/Volunteers', {
-    "records": [
-      {
-        "fields": {
-          "Slack: Jméno": req.body.name,
-          "Slack: Email": req.body.email,
-          "Skills": req.body.options_selected
-        }
-      }
-    ]
-  })
-  .then(response => {
-    console.log(response.data.records)
-    res.status(201).json({
+  http
+    .post('/Volunteers', {
+      records: [
+        {
+          fields: {
+            'Slack: Jméno': req.body.name,
+            'Slack: Email': req.body.email,
+            Skills: req.body.options_selected,
+          },
+        },
+      ],
+    })
+    .then((response) => {
+      console.log(response.data.records)
+      res.status(201).json({
         code: 201000,
-        message: 'Volunteer created.'
+        message: 'Volunteer created.',
+      })
     })
-  })
-  .catch(e => {
-    console.log(e)
-    res.status(500).json({
-      code: 50000,
-      message: JSON.stringify(e)
+    .catch((e) => {
+      console.log(e)
+      res.status(500).json({
+        code: 50000,
+        message: JSON.stringify(e),
+      })
     })
-  })
 }
