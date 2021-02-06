@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { CheckboxWrapper } from 'components/form/checkbox/styles'
 import { ValidationMessage } from 'components/form/input/styles'
@@ -30,32 +29,28 @@ export const FormValidationError = styled(ValidationMessage)`
   margin-top: 8px;
 `
 
-export const StyledSkillTree = styled(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ({ fetching, ...props }: SkillTreeProps & { fetching: boolean }) => (
-    <SkillTree {...props} />
-  )
-)`
-  position: relative;
+const getErrorStyles = ({
+  skills,
+  fetching,
+}: {
+  skills: SkillTreeProps['skills']
+  fetching: SkillTreeProps['fetching']
+}) =>
+  skills.length === 0 &&
+  !fetching &&
+  `
+  margin: 0;
+  min-height: 0;
   transition: 0.2s all linear;
-  max-height: ${({ fetching }) => (fetching ? '80px' : '10000px')};
+`
+
+export const StyledSkillTree = styled(SkillTree)`
+  position: relative;
+  transition: 3s all linear;
+  max-height: ${({ fetching }) => (fetching ? '80px' : '5000px')};
   min-height: 80px;
   overflow: hidden;
-
-  &:before {
-    content: '';
-    pointer-events: ${({ fetching }) => (fetching ? 'initial' : 'none')};
-    opacity: ${({ fetching }) => (fetching ? '1' : '0')};
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    z-index: 1;
-    transition: 0.2s all;
-  }
+  ${({ skills, fetching }) => getErrorStyles({ skills, fetching })}
 
   &:after {
     content: '';

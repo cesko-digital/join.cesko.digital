@@ -238,7 +238,13 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         </Callout>
       )}
       <S.Footer>
-        <Button type="submit" disabled={status === FormStatus.SUBMIT_PROGRESS}>
+        <Button
+          type="submit"
+          disabled={[
+            FormStatus.SUBMIT_PROGRESS,
+            FormStatus.FETCHING_ERROR,
+          ].includes(status)}
+        >
           {Strings.form_submit}
         </Button>
       </S.Footer>

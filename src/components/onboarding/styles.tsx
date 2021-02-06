@@ -72,3 +72,46 @@ export const SectionIntroductionContent = styled(SectionContent)`
 export const IntroductionHeader = styled.div`
   max-width: 768px;
 `
+
+export const Spinner = styled.div<{ color?: string; background?: string }>`
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  font-size: 10px;
+  text-indent: -9999em;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: ${({ theme, color }) => color || theme.colors.darkGrey};
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    ${({ theme, color }) => color || theme.colors.darkGrey} 0deg,
+    rgba(71, 71, 91, 0) 360deg
+  );
+  animation: spinnerRotate 1.2s infinite linear;
+  transform: translate(-50%, -50%);
+
+  &:before {
+    background: ${({ theme, background }) => background || theme.colors.white};
+    width: 95%;
+    height: 95%;
+    border-radius: 50%;
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  @keyframes spinnerRotate {
+    0% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+  }
+`
