@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import Strings from '../../../content/onboarding-form.yaml'
 import Input from 'components/form/input'
-import Checkbox from 'components/form/checkbox'
 import { Button } from 'components/buttons'
 import Callout from 'components/callout'
 import OnboardingService, { SkillField } from 'services/onboardingService'
@@ -17,7 +16,6 @@ interface OnboardingFormState {
   name: string
   email: string
   selectedSkills: string[]
-  personalData: boolean
   validations: {
     [name: string]: boolean
   }
@@ -28,12 +26,10 @@ const OnboardingForm = (props: OnboardingFormProps) => {
     name: '',
     email: '',
     selectedSkills: [],
-    personalData: false,
     validations: {
       name: true,
       email: true,
       skills: true,
-      personalData: true,
     },
   })
 
@@ -48,13 +44,9 @@ const OnboardingForm = (props: OnboardingFormProps) => {
   const { status, setStatus } = useContext(FormContext)
   const previousState: OnboardingFormState = usePrevious(state)
 
-  // validate skills, personal data after change
+  // validate skills after change
   useEffect(() => {
-    const validateCheckbox = async () => await validatePersonalData()
     const validateSkills = async () => await validateFieldSkills()
-    if (previousState.personalData !== state.personalData) {
-      validateCheckbox()
-    }
     if (previousState.selectedSkills.length !== state.selectedSkills.length) {
       validateSkills()
     }
@@ -92,14 +84,6 @@ const OnboardingForm = (props: OnboardingFormProps) => {
     setState((prev) => ({
       ...prev,
       selectedSkills: selected,
-    }))
-  }
-
-  const handlePersonalDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked } = e.target
-    setState((prev) => ({
-      ...prev,
-      personalData: checked,
     }))
   }
 
@@ -148,24 +132,11 @@ const OnboardingForm = (props: OnboardingFormProps) => {
     return fieldSkillsSelected
   }
 
-  const validatePersonalData = () => {
-    const validation = state.personalData !== false
-    setState((prev) => ({
-      ...prev,
-      validations: {
-        ...prev.validations,
-        personalData: validation,
-      },
-    }))
-    return validation
-  }
-
   const validateForm = async () => {
     const name = await validateName(state.name)
     const email = await validateEmail(state.email)
     const skills = await validateFieldSkills()
-    const checkbox = await validatePersonalData()
-    return name && email && skills && checkbox
+    return name && email && skills
   }
 
   const sendFormData = async () => {
@@ -267,14 +238,13 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         </Callout>
       )}
       <S.Footer>
-        <Checkbox
-          label={Strings.checkbox_confirmation}
-          checked={state.personalData}
-          onChange={handlePersonalDataChange}
-          isValid={state.validations.personalData}
-          disabled={status === FormStatus.SUBMIT_PROGRESS}
-        ></Checkbox>
-        <Button type="submit" disabled={status === FormStatus.SUBMIT_PROGRESS}>
+        <Button
+          type="submit"
+          disabled={[
+            FormStatus.SUBMIT_PROGRESS,
+            FormStatus.FETCHING_ERROR,
+          ].includes(status)}
+        >
           {Strings.form_submit}
         </Button>
       </S.Footer>
