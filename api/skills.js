@@ -48,7 +48,7 @@ const getPage = (skills, offset = null) => {
       .catch((e) => {
         console.log(e)
         reject({
-          message: JSON.stringify(e),
+          message: e.message || 'Server error',
         })
       })
   })
@@ -82,10 +82,10 @@ module.exports = async (req, res) => {
       skills_array.push(item)
     }
     res.status(200).json({ skills: skills_array })
-  } catch (err) {
+  } catch (e) {
     res.status(500).json({
       code: 50000,
-      message: JSON.stringify(err),
+      message: e.message || 'Server error',
     })
   }
 }
