@@ -115,7 +115,7 @@ const SkillFieldToggle = (props: Props) => {
             <S.SkillCheckbox
               separated
               id={props.skillField.senior_id}
-              label={`${Strings.skills_senior} - ${props.skillField.skill}`}
+              label={Strings.skills_senior}
               onChange={onCheckboxChange}
               checked={isSelected(props.skillField.senior_id)}
               disabled={status === FormStatus.SUBMIT_PROGRESS}

@@ -200,7 +200,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         id="name"
         name="name"
         label={Strings.field_name}
-        placeholder="Tomáš Jedno"
+        placeholder="celé jméno"
         onChange={handleNameChange}
         isValid={state.validations.name}
         validationMessage={Strings.validation_name}
