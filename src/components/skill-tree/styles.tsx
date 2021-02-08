@@ -100,8 +100,16 @@ export const SelectedCountLabel = styled.span`
   position: absolute;
   top: 0;
   right: 0;
-  padding: 13px 40px;
-  font-size: ${({ theme }) => theme.fontSizes.base}px;
   line-height: ${({ theme }) => theme.lineHeights.button};
   pointer-events: none;
+  padding: 8px 0 40px 13px;
+  font-size: ${({ theme }) => theme.fontSizes.small}px;
+  text-align: right;
+  max-width: 30%;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    max-width: none;
+    padding: 13px 40px;
+    font-size: 13px;
+  }
 `
