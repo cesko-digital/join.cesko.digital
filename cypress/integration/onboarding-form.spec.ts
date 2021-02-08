@@ -7,7 +7,7 @@ describe('Onboarding form', () => {
 
   it('should successfully load', () => {
     cy.get('form')
-      .findByText(/Kontaktní formulář/i)
+      .findByText(/Představ se/i)
       .should('exist')
   })
 })
