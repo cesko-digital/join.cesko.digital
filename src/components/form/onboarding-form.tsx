@@ -248,6 +248,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
           type="submit"
           disabled={[
             FormStatus.SUBMIT_PROGRESS,
+            FormStatus.SUBMIT_SUCCESS,
             FormStatus.FETCHING_ERROR,
           ].includes(status)}
         >
