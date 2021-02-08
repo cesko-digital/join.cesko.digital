@@ -16,12 +16,12 @@ const http = axios.create({
 module.exports = (req, res) => {
   console.log(req.body)
   http
-    .post('/Volunteers', {
+    .post('/Registrations', {
       records: [
         {
           fields: {
-            'Slack: Jméno': req.body.name,
-            'Slack: Email': req.body.email,
+            'Name': req.body.name,
+            'Email': req.body.email,
             Skills: req.body.options_selected,
           },
         },
