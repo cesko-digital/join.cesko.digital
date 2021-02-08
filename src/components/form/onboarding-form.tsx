@@ -188,7 +188,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
   const FormValidation = () =>
     !state.validations.skills ? (
       <S.FormValidationError role="alert">
-        Vyberte alespoň jednu dovednost
+        {Strings.skills_none}
       </S.FormValidationError>
     ) : null
 
