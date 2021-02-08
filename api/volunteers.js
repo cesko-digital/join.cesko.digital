@@ -38,7 +38,7 @@ module.exports = (req, res) => {
       console.log(e)
       res.status(500).json({
         code: 50000,
-        message: JSON.stringify(e),
+        message: e.message || 'Server error',
       })
     })
 }
