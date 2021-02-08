@@ -150,6 +150,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
       setStatus(FormStatus.SUBMIT_SUCCESS)
     } catch (e) {
       setStatus(FormStatus.SUBMIT_ERROR)
+      throw new Error(e)
     }
   }
 
@@ -157,7 +158,11 @@ const OnboardingForm = (props: OnboardingFormProps) => {
     e.preventDefault()
     // run validations on submit
     if (!(await validateForm())) return
-    await sendFormData()
+    try {
+      await sendFormData()
+    } catch (e) {
+      return
+    }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const redirect = setTimeout(() => {
       document.location.href = process.env.GATSBY_FORM_REDIRECT_URL || '/'
@@ -203,7 +208,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         placeholder="celé jméno"
         onChange={handleNameChange}
         isValid={state.validations.name}
-        maxlength="60"
+        maxLength={60}
         validationMessage={Strings.validation_name}
         disabled={status === FormStatus.SUBMIT_PROGRESS}
       />
