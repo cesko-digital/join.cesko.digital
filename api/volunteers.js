@@ -20,8 +20,8 @@ module.exports = (req, res) => {
       records: [
         {
           fields: {
-            'Name': req.body.name,
-            'Email': req.body.email,
+            Name: req.body.name,
+            Email: req.body.email,
             Skills: req.body.options_selected,
           },
         },
