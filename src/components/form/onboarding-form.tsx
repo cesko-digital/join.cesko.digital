@@ -203,6 +203,7 @@ const OnboardingForm = (props: OnboardingFormProps) => {
         placeholder="celé jméno"
         onChange={handleNameChange}
         isValid={state.validations.name}
+        maxlength="60"
         validationMessage={Strings.validation_name}
         disabled={status === FormStatus.SUBMIT_PROGRESS}
       />
