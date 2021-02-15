@@ -46,8 +46,6 @@ export const PureSEO: React.FC<PureSEOProps> = ({
   title,
   robots,
 }: PureSEOProps) => {
-  const metaDescription = description || data.site.siteMetadata.description
-
   return (
     <Helmet
       htmlAttributes={{
@@ -58,7 +56,7 @@ export const PureSEO: React.FC<PureSEOProps> = ({
       meta={[
         {
           name: `description`,
-          content: metaDescription,
+          content: description,
         },
         {
           property: `og:title`,
@@ -70,7 +68,7 @@ export const PureSEO: React.FC<PureSEOProps> = ({
         },
         {
           property: `og:description`,
-          content: metaDescription,
+          content: description,
         },
         {
           property: `og:type`,
@@ -90,7 +88,7 @@ export const PureSEO: React.FC<PureSEOProps> = ({
         },
         {
           name: `twitter:description`,
-          content: metaDescription,
+          content: description,
         },
       ].concat(
         robots
@@ -125,9 +123,9 @@ const SEO: React.FC<SEOProps> = ({ description, title, robots }: SEOProps) => {
   return (
     <PureSEO
       data={data}
-      title={title}
+      title={title || data.site.siteMetadata.title}
       robots={robots}
-      description={description}
+      description={description || data.site.siteMetadata.description}
     />
   )
 }
