@@ -2,8 +2,9 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: `Join Česko.Digital`,
-    description: `Skrz jedničky a nuly měníme Česko k lepšímu`,
+    title: `Přidej se k Česko.Digital`,
+    description: `Staň se součástí Česko.Digital, největší komunity expertních dobrovolníků a dobrovolnic! Rádi tě zapojíme do projektů, které tě budou bavit a kde můžeš získat nové zkušenosti nebo se podělit o své nápady.`,
+    thumbnail: 'https://data.cesko.digital/img/172a1526.png',
     author: `@ceskodigital`,
   },
   plugins: [

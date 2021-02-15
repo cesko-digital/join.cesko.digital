@@ -12,6 +12,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 interface SiteMetadata {
   description: string
   title: string
+  thumbnail: string
   author: string
 }
 
@@ -64,6 +65,10 @@ export const PureSEO: React.FC<PureSEOProps> = ({
           content: title,
         },
         {
+          property: `og:image`,
+          content: data.site.siteMetadata.thumbnail,
+        },
+        {
           property: `og:description`,
           content: metaDescription,
         },
@@ -109,6 +114,7 @@ const SEO: React.FC<SEOProps> = ({ description, title, robots }: SEOProps) => {
           siteMetadata {
             title
             description
+            thumbnail
             author
           }
         }
