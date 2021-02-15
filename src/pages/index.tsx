@@ -19,6 +19,7 @@ const IndexPage: React.FC = () => {
               <S.Highlighted>{Strings.highlighted}</S.Highlighted>{' '}
               {Strings.body}
             </S.Body>
+            <S.Body color={'darkGrey'}>{Strings.nextSteps}</S.Body>
           </S.IntroductionHeader>
         </S.SectionIntroductionContent>
       </Section>

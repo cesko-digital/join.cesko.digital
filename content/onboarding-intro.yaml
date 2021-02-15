@@ -1,8 +1,14 @@
-heading: Přidej se k nám
+heading: Přidej se k nám!
 perex: Staň se součástí Česko.Digital, největší komunity expertních
-  dobrovolníků a dobrovolnic! Rádi tě zapojíme do projektů, které tě
+  dobrovolníků a dobrovolnic. Rádi tě zapojíme do projektů, které tě
   budou bavit a kde můžeš získat nové zkušenosti nebo se podělit o
   své nápady.
 highlighted: Začni prosím tím, že vyplníš následující registrační formulář.
-body: Díky němu tě lépe poznáme a uděláme si představu o tom,
-  jaké projekty by tě mohly zajímat a kde bychom tě potřebovali.
+body: Vyplněná data neprezentujeme veřejně, ale lépe tě díky nim poznáme a
+  uděláme si představu o tom, jaké projekty by tě mohly zajímat a kde bychom
+  tě potřebovali.
+nextSteps:
+  Po odeslání formuláře se dostaneš na náš Slack, ve kterém probíhá
+  veškerá komunikace o projektech a mezi členy komunity. Tam tě také hned
+  přivítá robot, který ti pomůže s orientací v komunitních kanálech
+  a předá ti další důležité informace.
