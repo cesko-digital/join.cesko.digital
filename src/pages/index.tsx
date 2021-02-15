@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Layout, Section, SectionContent } from 'components/layout'
+import SEO from 'components/seo'
 import { ThemeContext } from 'styled-components'
 import Strings from '../../content/onboarding-intro.yaml'
 import OnboardingForm from 'components/form'
@@ -10,6 +11,7 @@ const IndexPage: React.FC = () => {
 
   return (
     <Layout>
+      <SEO />
       <Section>
         <S.SectionIntroductionContent>
           <S.IntroductionHeader>
@@ -23,7 +25,6 @@ const IndexPage: React.FC = () => {
           </S.IntroductionHeader>
         </S.SectionIntroductionContent>
       </Section>
-
       <Section backgroundColor={theme.colors.pebble}>
         <SectionContent verticalPadding={40}>
           <OnboardingForm />
