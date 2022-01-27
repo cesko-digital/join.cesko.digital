@@ -28,7 +28,7 @@
     "@mdx-js/react": "^1.6.6",
     "axios": "^0.21.0",
     "babel-plugin-styled-components": "^1.11.1",
-    "cesko-digital-web": "git+https://github.com/cesko-digital/web.git#rework",
+    "cesko-digital-web": "git+https://github.com/cesko-digital/web.git#last-gatsby",
     "dotenv": "^8.2.0",
     "gatsby": "2.32.8",
     "gatsby-image": "^2.11.0",
