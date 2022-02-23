@@ -1,0 +1,9 @@
+{
+    "redirects": [
+        {
+            "source": "/",
+            "destination": "https://cesko.digital/join",
+            "statusCode": 301
+        }
+    ]
+}
